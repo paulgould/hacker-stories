@@ -19,6 +19,7 @@ const App = () => {
       objectID: 1,
     },
   ];
+  // console.log("App renders");
   return (
     <div>
       <h1>My Hacker Stories</h1>
@@ -30,26 +31,24 @@ const App = () => {
 };
 
 const Search = () => {
+  const [searchTerm, setSearchTerm] = React.useState("");
   const handleChange = (event) => {
-    console.log(event);
+    setSearchTerm(event.target.value);
   };
-  const handleBlur = (event) => {
-    console.log("blurred!");
-  };
+  // console.log("Search renders");
   return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input
-        id="search"
-        type="text"
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      <input id="search" type="text" onChange={handleChange} />
+      <p>
+        Search for <strong>{searchTerm}</strong>
+      </p>
     </div>
   );
 };
 
 const List = (props) => {
+  // console.log("List renders");
   return (
     <ul>
       {props.list.map((item) => (
@@ -61,6 +60,7 @@ const List = (props) => {
 
 const Item = (props) => {
   const item = props.item;
+  // console.log("Item renders");
   return (
     <li>
       <span>
