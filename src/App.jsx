@@ -43,44 +43,30 @@ const App = () => {
   );
 };
 
-const Search = (props) => {
-  console.log("Search renders");
-  return (
-    <div>
-      <label htmlFor="search">Search: </label>
-      <input
-        id="search"
-        type="text"
-        value={props.searchTerm}
-        onChange={props.onSearch}
-      />
-    </div>
-  );
-};
+const Search = ({ searchTerm, onSearch }) => (
+  <div>
+    <label htmlFor="search">Search: </label>
+    <input id="search" type="text" value={searchTerm} onChange={onSearch} />
+  </div>
+);
 
-const List = (props) => {
-  console.log("List renders");
-  return (
-    <ul>
-      {props.list.map((item) => (
-        <Item key={item.objectID} item={item} />
-      ))}
-    </ul>
-  );
-};
+const List = ({ list }) => (
+  <ul>
+    {list.map((item) => (
+      <Item key={item.objectID} item={item} />
+    ))}
+  </ul>
+);
 
-const Item = (props) => {
-  const item = props.item;
-  console.log("Item renders");
-  return (
-    <li>
-      <span>
-        <a href={item.url}>{item.title}</a>
-      </span>
-      <span>{item.author}</span>
-      <span>{item.num_comments}</span>
-      <span>{item.points}</span>
-    </li>
-  );
-};
+const Item = ({ item }) => (
+  <li>
+    <span>
+      <a href={item.url}>{item.title}</a>
+    </span>
+    <span>{item.author}</span>
+    <span>{item.num_comments}</span>
+    <span>{item.points}</span>
+  </li>
+);
+
 export default App;
