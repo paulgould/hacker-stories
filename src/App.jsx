@@ -1,6 +1,12 @@
 import * as React from "react";
 
+// App // <Search onSearch={handleSearch} /> //  <List list={stories.filter((story) => story.title.startsWith(searchTerm))}/>
+// Search(props) // props.onSearch // onChange={props.onSearch}
+// List(props) // props.list // <Item key={item.objectID} item={item} />
+// Item(props) // props.item
+
 const App = () => {
+  const [searchTerm, setSearchTerm] = React.useState("React");
   const stories = [
     {
       title: "React",
@@ -20,39 +26,40 @@ const App = () => {
     },
   ];
   const handleSearch = (event) => {
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
-  // console.log("App renders");
+  const searchedStories = stories.filter((story) =>
+    story.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  console.log("App renders");
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <Search onSearch={handleSearch} />
+      <Search searchTerm={searchTerm} onSearch={handleSearch} />
       <hr />
-      <List list={stories} />
+      <List list={searchedStories} />
     </div>
   );
 };
 
 const Search = (props) => {
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-    props.onSearch(event);
-  };
-  // console.log("Search renders");
+  console.log("Search renders");
   return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={handleChange} />
-      <p>
-        Search for <strong>{searchTerm}</strong>
-      </p>
+      <input
+        id="search"
+        type="text"
+        value={props.searchTerm}
+        onChange={props.onSearch}
+      />
     </div>
   );
 };
 
 const List = (props) => {
-  // console.log("List renders");
+  console.log("List renders");
   return (
     <ul>
       {props.list.map((item) => (
@@ -64,7 +71,7 @@ const List = (props) => {
 
 const Item = (props) => {
   const item = props.item;
-  // console.log("Item renders");
+  console.log("Item renders");
   return (
     <li>
       <span>
